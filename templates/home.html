@@ -3,20 +3,27 @@
 {% block body %}
 <br><br>
 <h2>Recent posts</h2>
-
+<br>
 
 {% for post in recent_posts %}
+<div class="left-align">
+	<div class="post">
 <p><a href="/posts/{{ post.id }}">Post # {{ post.id }}</a> ({{ post.timeStamp }}): {{ post.shortSummary }}</p>
+	</div><br>
+</div>
 {% endfor %}
 
 <br><br>
 <h2>Recent activity</h2>
-
-{% for reply in recent_replies %}
-<p><a href="/posts/{{ reply.listingId }}">Post # {{ reply.listingId }}</a> ({{ reply.timeStamp }})</p>
-<p>{{ reply.comment }}</p>
-{% endfor %}
-
+<br>
+<div class="left-align">
+	{% for reply in recent_replies %}
+	<div class="thread">
+		<p>Reply to <a href="/posts/{{ reply.listingId }}">Post # {{ reply.listingId }}</a> ({{ reply.timeStamp }})</p>
+		<p><em>{{ reply.comment }}</em></p>
+	</div><br>
+	{% endfor %}
+</div>
 
 
 {% endblock %}

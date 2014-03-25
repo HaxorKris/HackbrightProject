@@ -9,6 +9,22 @@ body {
 	background:#F6FA88;
 }
 
+.left-align {
+	text-align:left;
+}
+
+.thread {
+	border:3px solid gray;
+	background-color:#FBFCE9;
+	padding: 20px;
+}
+
+.post {
+	border:3px solid gray;
+	background-color:#D7F1FC;
+	padding: 20px;
+}
+
 #header h1 {
 	height:80px;
 	line-height:80px;
