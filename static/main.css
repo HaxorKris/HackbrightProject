@@ -1,0 +1,22 @@
+
+/*body {
+    background-color: #eee;
+}*/
+
+form.signin {
+    width: 330px;
+    margin: 50px auto;
+}
+
+form.signin input.form-control {
+    margin-bottom: 5px;
+}
+
+form.signin input.btn {
+    margin-top: 15px;
+}
+
+// create class name Assistant and the type of comment could be assistant from the db and then
+// in the html just pop the class name in based on the role in the database // 
+
+// warning: hold off letting people outside play with it //

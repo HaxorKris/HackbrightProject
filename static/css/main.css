@@ -1,0 +1,100 @@
+body {
+    background-color: #FAFCCC;
+    text-align:center;
+    font-size:16px;
+}
+
+#header {
+	width:100%;
+	background:#F6FA88;
+}
+
+#header h1 {
+	height:80px;
+	line-height:80px;
+	margin:0;
+	padding-left:10px;
+}
+
+
+#content {
+	background:#FAFCCC;
+}
+
+#navigation {
+	background:#AEE3FA;
+	font-size:16px;
+}
+
+div#navigation ul{margin:15px 0; padding:0; list-style-type:none;}
+
+#extra {
+	background:#82AABC;
+}
+
+#footer {
+	clear:both;
+	width:100%;
+	background:#F6FA88;
+}
+
+#footer p {
+	margin:0;
+	padding:5px 10px
+}
+
+hr {
+	border:none;
+	border-top:5px solid #1E1E1E;
+	height:5px;
+	margin-bottom:25px;
+}
+
+form.signin {
+    width: 330px;
+    margin: 50px auto;
+}
+
+form.signin input.form-control {
+    margin-bottom: 5px;
+}
+
+form.signin input.btn {
+    margin-top: 15px;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	}
+
+img {
+	border: none;
+	}
+	
+#menu {
+	width: 200px;
+	margin: 10px;
+	}
+	
+#menu li a {
+	height: 32px;
+  	voice-family: "\"}\""; 
+  	voice-family: inherit;
+  	height: 24px;
+	text-decoration: none;
+	}	
+	
+#menu li a:link, #menu li a:visited {
+	color: #4D4D4D;
+	display: block;
+	background:  url(menu.gif);
+	padding: 8px 0 0 10px;
+	}
+	
+#menu li a:hover {
+	color: #FF9834;
+	background:  url(menu.gif) 0 -32px;
+	padding: 8px 0 0 10px;
+	}

@@ -1,0 +1,23 @@
+{% extends 'master2.html' %}
+
+{% block body %}
+<br><br>
+<h2>Post # {{ post.id }}:  {{ post.shortSummary }}</h2>
+<br>
+<p>Post from User {{ post.ownerId }}</p>
+<p>{{ post.timeStamp }}  from zip code {{ post.zipcode }}</p>
+<p>{{ post.longDescription }}</p>
+
+<br><br>
+<h3>Replies</h3>
+
+{% for comment in comments %}
+<p>Reply from User {{ comment.authorId }}</p>
+<p>{{ comment.timeStamp }}  from zip code {{ comment.zipcode }}</p>
+<br>
+<p>{{ comment.comment }}
+
+{% endfor %}
+
+
+{% endblock %}

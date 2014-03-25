@@ -1,0 +1,22 @@
+{% extends 'master2.html' %}
+
+{% block body %}
+<br><br>
+<h2>Recent posts</h2>
+
+
+{% for post in recent_posts %}
+<p><a href="/posts/{{ post.id }}">Post # {{ post.id }}</a> ({{ post.timeStamp }}): {{ post.shortSummary }}</p>
+{% endfor %}
+
+<br><br>
+<h2>Recent activity</h2>
+
+{% for reply in recent_replies %}
+<p><a href="/posts/{{ reply.listingId }}">Post # {{ reply.listingId }}</a> ({{ reply.timeStamp }})</p>
+<p>{{ reply.comment }}</p>
+{% endfor %}
+
+
+
+{% endblock %}

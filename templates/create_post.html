@@ -1,0 +1,54 @@
+{% extends 'master2.html' %}
+
+{% block body %}
+           <form class="posting" method="POST">
+                <h2 class="posting-heading">Post to OGEE</h2>
+                <p><strong>Have something to gift? Need something gifted? Continue below.</strong>  <em><a href="/guidelines">Read our posting guidelines here.</a></em></p>
+                <br>
+                <p>You are looking to:...
+                <input type="radio" name="role" value="gift"> gift something
+                <input type="radio" name="role" value="receive"> receive something<br></p>
+                <p>A short, concise title for your post:</p>
+                <input type="text" class="form-control" placeholder="(max 60 chars)" name="shortSummary">
+                <p>A description for your post:</p>
+                <input type="text" class="form-control" placeholder="(max 300 chars)" name="longDescription">
+                <p>Information about your location and availability:</p>
+                <input type="text" class="form-control" placeholder="Zipcode" name="zipcode">
+                
+                <p>Is this urgent? (Needed ASAP)...
+                <input type="radio" name="isASAP" value="1">Yes
+                <input type="radio" name="isASAP" value="0">No<br></p>
+
+                <p>Can you meet during a weekday?...
+                <input type="radio" name="canWeekdays" value="1">Yes
+                <input type="radio" name="canWeekdays" value="0">No<br></p>
+                                
+                <p>Can you meet on a weekday evening?...
+                <input type="radio" name="canEvenings" value="1">Yes
+                <input type="radio" name="canEvenings" value="0">No<br></p>
+
+                <p>Can you meet on a weekend?...
+                <input type="radio" name="canWeekends" value="1">Yes
+                <input type="radio" name="canWeekends" value="0">No<br></p>
+
+                <p>Can you travel to make this happen?...
+                <input type="radio" name="canTravel" value="1">Yes
+                <input type="radio" name="canTravel" value="0">No<br></p>
+
+                <p>Can you meet in a public location?...
+                <input type="radio" name="canMeet" value="1">Yes
+                <input type="radio" name="canMeet" value="0">No<br></p>
+
+                <p>What buslines, if any, are nearby?</p>
+                <input type="text" class="form-control" placeholder="e.g. 44, 12" name="busLines">
+
+                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit">
+            </form>
+{% endblock %}
+
+
+<!--    id,ownerId,timeStamp,zipcode,shortSummary,longDescription,pictureId
+    isASAP,canWeekdays,canEvenings,canWeekends,canTravel,canMeet
+    busLines
+    offerExtendedTo -->
+

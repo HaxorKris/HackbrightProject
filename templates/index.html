@@ -1,0 +1,73 @@
+<html>
+<head></head>
+<body>
+<div id="fb-root"></div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<script>
+
+  window.fbAsyncInit = function() {
+    console.log("fbAsyncInit fired");
+  FB.init({
+    appId      : '221505671371305',  
+    status     : true, // check login status
+    cookie     : true, // enable cookies to allow the server to access the session
+    xfbml      : true  // parse XFBML
+  });
+  FB.Event.subscribe('auth.authResponseChange', function(response) {
+    console.log(response);
+    if (response.status === 'connected') {
+      var FBID = response.authResponse.userID;
+      console.log("fbid = " + FBID);
+      var url = '{{ url_for("check_for_user") }}';
+      console.log(url);
+
+       $.ajax({
+         url: '{{ url_for("check_for_user") }}',
+         type: "POST",
+         data: { fbid: FBID }
+       }).done(function(data) {
+         console.log("it worked, we got: " + data)
+         location.href=data;
+       }).fail(function( jqXHR, textStatus ) {
+         alert( "Request failed: " + textStatus );
+       });
+      sessionStorage.setItem('FBID', FBID);
+
+    } else if (response.status === 'not_authorized') {
+      FB.login();
+    } else {
+      FB.login();
+    }
+  });
+  };
+
+  // Load the SDK asynchronously
+  (function(d){
+   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement('script'); js.id = id; js.async = true;
+   js.src = "//connect.facebook.net/en_US/all.js";
+   ref.parentNode.insertBefore(js, ref);
+  }(document));
+
+  // Here we run a very simple test of the Graph API after login is successful. 
+  // This testAPI() function is only called in those cases. 
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me/mutualfriends/{{ fbID }}', function(response) {
+      console.log('Good to see you, ' + response.data.length + '.');
+      
+
+
+    });
+  }
+</script>
+
+<!--
+  Below we include the Login Button social plugin. This button uses the JavaScript SDK to
+  present a graphical Login button that triggers the FB.login() function when clicked. -->
+
+<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+</body>
+</html>
