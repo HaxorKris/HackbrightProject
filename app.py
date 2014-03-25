@@ -94,6 +94,23 @@ def post_details(postid):
 
 	return render_template("post.html", postid=postid, post=post, comments=comments)
 
+@app.route("/posts/<postid>", methods=["POST"])
+def add_comment(postid):
+	FBID = session.get("fbid")
+	userid = session.get("userid")
+	
+	roleform = request.form.get("role")
+	commentform = request.form.get("comment")
+	zipcodeform = request.form.get("zipcode")
+	isasapform = request.form.get("isASAP")
+	canweekdaysform = request.form.get("canWeekdays")
+	caneveningsform = request.form.get("canEvenings")
+	canweekendsform = request.form.get("canWeekends")
+	cantravelform = request.form.get("canTravel")
+	canmeetform = request.form.get("canMeet")
+	buslinesform = request.form.get("busLines")	
+
+
 @app.route("/submit")
 def post():
 

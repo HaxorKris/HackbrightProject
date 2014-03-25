@@ -132,6 +132,15 @@ def getCommentsForPost(postid):
 	comments = session.query(Response).filter_by(listingId=c.id)
 	return comments
 
+def submit_comment(userid, roleform, commentform, zipcodeform, isasapform, canweekdaysform, caneveningsform, 
+	canweekendsform, cantravelform, canmeetform, buslinesform):
+
+	temp_comment = Response(ownerId=userid, role=roleform, comment=commentform, zipcode=zipcodeform, 
+		isASAP=isasapform, canWeekdays=canweekdaysform, canEvenings=caneveningsform, 
+		canWeekends=canweekendsform, canTravel=cantravelform, canMeet=canmeetform, busLines=buslinesform, 
+		timeStamp=int(time.time()))
+	session.add(temp_comment)
+	session.commit()
 
 
 

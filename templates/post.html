@@ -4,20 +4,62 @@
 <br><br>
 <h2>Post # {{ post.id }}:  {{ post.shortSummary }}</h2>
 <br>
-<p>Post from User {{ post.ownerId }}</p>
-<p>{{ post.timeStamp }}  from zip code {{ post.zipcode }}</p>
-<p>{{ post.longDescription }}</p>
+<p align="left">Post from User {{ post.ownerId }}</p>
+<p align="left">{{ post.timeStamp }}  from zip code {{ post.zipcode }}</p>
+<p align="left">{{ post.longDescription }}</p>
 
 <br><br>
 <h3>Replies</h3>
 
 {% for comment in comments %}
-<p>Reply from User {{ comment.authorId }}</p>
-<p>{{ comment.timeStamp }}  from zip code {{ comment.zipcode }}</p>
+<p align="left">Reply from User {{ comment.authorId }}</p>
+<p align="left">{{ comment.timeStamp }}  from zip code {{ comment.zipcode }}</p>
 <br>
-<p>{{ comment.comment }}
+<p align="left">{{ comment.comment }}
 
 {% endfor %}
+<br><br><br>
+           <form class="response" method="POST">
+                <h3 class="response-heading">Respond to this post</h3>
+                <p><em><a href="/guidelines">Read our posting guidelines here.</a></em></p>
+                <br>
+                <p align="left">You are interested in:...
+                <input type="radio" name="role" value="receive"> this item
+                <input type="radio" name="role" value="assist"> helping this item get to its new home<br></p>
+                <p align="left">Add a comment here:</p>
+                <input type="text" class="form-control" placeholder="(max 300 chars)" name="comment">
+                <p align="left">Information about your location and availability:</p>
+                <p align="left">What is your zipcode?<input type="text" class="form-control" placeholder="Zipcode" name="zipcode"></p>
+                
+                <p align="left">Can you get this ASAP?
+                <input type="radio" name="isASAP" value="1">Yes
+                <input type="radio" name="isASAP" value="0">No<br></p>
+
+                <p align="left">Can you meet during a weekday?...
+                <input type="radio" name="canWeekdays" value="1">Yes
+                <input type="radio" name="canWeekdays" value="0">No<br></p>
+                                
+                <p align="left">Can you meet on a weekday evening?...
+                <input type="radio" name="canEvenings" value="1">Yes
+                <input type="radio" name="canEvenings" value="0">No<br></p>
+
+                <p align="left">Can you meet on a weekend?...
+                <input type="radio" name="canWeekends" value="1">Yes
+                <input type="radio" name="canWeekends" value="0">No<br></p>
+
+                <p align="left">Can you travel to make this happen?...
+                <input type="radio" name="canTravel" value="1">Yes
+                <input type="radio" name="canTravel" value="0">No<br></p>
+
+                <p align="left">Can you meet in a public location?...
+                <input type="radio" name="canMeet" value="1">Yes
+                <input type="radio" name="canMeet" value="0">No<br></p>
+
+                <p align="left">What buslines, if any, are nearby?</p>
+                <input type="text" class="form-control" placeholder="e.g. 44, 12" name="busLines">
+
+                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit">
+            </form>
 
 
 {% endblock %}
