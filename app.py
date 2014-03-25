@@ -68,8 +68,8 @@ def home():
 	userid = session.get("userid")
 	recent_posts = model.recent_posts(userid)
 #	recent_assists = model.recent_assists(uid)
-#	recent_replies = model.recent_replies(uid)
-	return render_template("home.html", recent_posts=recent_posts)
+	recent_replies = model.recent_replies(userid)
+	return render_template("home.html", recent_posts=recent_posts, recent_replies=recent_replies)
 
 
 # @app.route("/messages")
@@ -109,6 +109,11 @@ def add_comment(postid):
 	cantravelform = request.form.get("canTravel")
 	canmeetform = request.form.get("canMeet")
 	buslinesform = request.form.get("busLines")	
+
+	model.submit_comment(userid, postid, roleform, commentform, zipcodeform, isasapform, canweekdaysform, 
+		caneveningsform, canweekendsform, cantravelform, canmeetform, buslinesform)
+
+	# return redirect(url_for("home"))
 
 
 @app.route("/submit")

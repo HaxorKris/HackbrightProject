@@ -112,15 +112,9 @@ def recent_posts(uid):
 	return post_list
 
 
-def recent_assists(uid):
-	u = session.query(User).get(uid)
-	assist_list = session.query(Request).filter_by(authorId=u.id)
-	return assist_list
-
-
 def recent_replies(uid):
 	u = session.query(User).get(uid)
-	reply_list = session.query(Assist).filter_by(authorId=u.id)
+	reply_list = session.query(Response).filter_by(authorId=u.id)
 	return reply_list
 
 def getPostInfo(postid):
@@ -132,11 +126,11 @@ def getCommentsForPost(postid):
 	comments = session.query(Response).filter_by(listingId=c.id)
 	return comments
 
-def submit_comment(userid, roleform, commentform, zipcodeform, isasapform, canweekdaysform, caneveningsform, 
+def submit_comment(userid, roleform, postid, commentform, zipcodeform, isasapform, canweekdaysform, caneveningsform, 
 	canweekendsform, cantravelform, canmeetform, buslinesform):
 
-	temp_comment = Response(ownerId=userid, role=roleform, comment=commentform, zipcode=zipcodeform, 
-		isASAP=isasapform, canWeekdays=canweekdaysform, canEvenings=caneveningsform, 
+	temp_comment = Response(authorId=userid, role=roleform, listingId=postid, comment=commentform, zipcode=zipcodeform, 
+		canASAP=isasapform, canWeekdays=canweekdaysform, canEvenings=caneveningsform, 
 		canWeekends=canweekendsform, canTravel=cantravelform, canMeet=canmeetform, busLines=buslinesform, 
 		timeStamp=int(time.time()))
 	session.add(temp_comment)
