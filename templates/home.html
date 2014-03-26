@@ -2,7 +2,7 @@
 
 {% block body %}
 <br><br>
-<h2>Recent posts</h2>
+<h2>Your recent posts</h2>
 <br>
 
 {% for post in recent_posts %}
@@ -14,13 +14,13 @@
 {% endfor %}
 
 <br><br>
-<h2>Recent activity</h2>
+<h2>Your recent replies</h2>
 <br>
 <div class="left-align">
 	{% for reply in recent_replies %}
 	<div class="thread">
 		<p>Reply to <a href="/posts/{{ reply.listingId }}">Post # {{ reply.listingId }}</a> ({{ reply.timeStamp }})</p>
-		<p><em>{{ reply.comment }}</em></p>
+		<p><img src="/static/img_{{ reply.role }}.jpg" style="padding:15px;"/>::<em>{{ reply.comment }}</em></p>
 	</div><br>
 	{% endfor %}
 </div>

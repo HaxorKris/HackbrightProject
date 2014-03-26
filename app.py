@@ -113,7 +113,7 @@ def add_comment(postid):
 	model.submit_comment(userid, postid, roleform, commentform, zipcodeform, isasapform, canweekdaysform, 
 		caneveningsform, canweekendsform, cantravelform, canmeetform, buslinesform)
 
-	# return redirect(url_for("home"))
+	return redirect(url_for("home"))
 
 
 @app.route("/submit")
@@ -143,6 +143,14 @@ def submission():
 		canweekdaysform, caneveningsform, canweekendsform, cantravelform, canmeetform, buslinesform)
 
 	return redirect(url_for("home"))
+
+@app.route("/recent")
+def global_get_posts():
+	return render_template("recent.html")
+
+@app.route("/guidelines")
+def posting_guidelines():
+	return render_template("rules.html")
 
 	# get postID
 	# return /posts/ + postID

@@ -6,6 +6,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy import func
 import time
 import datetime
 import sqlite3
@@ -109,12 +110,14 @@ def submit_post(userid, roleform, shortsummaryform, longdescriptionform, zipcode
 def recent_posts(uid):
 	u = session.query(User).get(uid)
 	post_list = session.query(Post).filter_by(ownerId=u.id)
+	post_list = post_list.order_by(Post.id.desc())
 	return post_list
 
 
 def recent_replies(uid):
 	u = session.query(User).get(uid)
 	reply_list = session.query(Response).filter_by(authorId=u.id)
+	reply_list = reply_list.order_by(Response.id.desc())
 	return reply_list
 
 def getPostInfo(postid):
@@ -126,10 +129,10 @@ def getCommentsForPost(postid):
 	comments = session.query(Response).filter_by(listingId=c.id)
 	return comments
 
-def submit_comment(userid, roleform, postid, commentform, zipcodeform, isasapform, canweekdaysform, caneveningsform, 
+def submit_comment(userid, postid, roleform, commentform, zipcodeform, isasapform, canweekdaysform, caneveningsform, 
 	canweekendsform, cantravelform, canmeetform, buslinesform):
 
-	temp_comment = Response(authorId=userid, role=roleform, listingId=postid, comment=commentform, zipcode=zipcodeform, 
+	temp_comment = Response(authorId=userid, listingId=postid, role=roleform, comment=commentform, zipcode=zipcodeform, 
 		canASAP=isasapform, canWeekdays=canweekdaysform, canEvenings=caneveningsform, 
 		canWeekends=canweekendsform, canTravel=cantravelform, canMeet=canmeetform, busLines=buslinesform, 
 		timeStamp=int(time.time()))

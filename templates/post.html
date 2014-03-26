@@ -19,11 +19,11 @@
 <div class="left-align">
 	{% for comment in comments %}
 	<div class="thread">
-		
+		<div class="role_{{ comment.role }}">
 		<p><strong>Reply from <a href="/user/{{ comment.authorId }}">User {{ comment.authorId }}</a></strong>
 			&nbsp;&nbsp; [&nbsp;&nbsp;&nbsp;{{ comment.timeStamp }}  from zip code {{ comment.zipcode }} &nbsp;&nbsp;&nbsp; ]</p>
-		<p>:: <em>{{ comment.comment }}</em></p>
-		
+		<p><img src="/static/img_{{ comment.role }}.jpg" style="padding:15px;"/>:: <em>{{ comment.comment }}</em></p>
+		</div>
 	</div><br>
 	{% endfor %}
 </div>
