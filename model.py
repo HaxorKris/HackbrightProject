@@ -57,6 +57,12 @@ class Post(Base):
 
 	author = relationship("User", backref=backref("listings", order_by=id))
 
+	def time_string(instance_of_class):
+		dateObject = time.localtime(instance_of_class.timeStamp)
+		return time.strftime('%m-%d-%Y %H:%M:%S', dateObject)
+
+
+
 
 class Response(Base):
 	__tablename__ = "responses"
@@ -86,7 +92,8 @@ class Response(Base):
 
 	def time_string(instance_of_class):
 		dateObject = time.localtime(instance_of_class.timeStamp)
-		return time.strftime('%m-%d-%Y %H:%M', dateObject)
+		return time.strftime('%m-%d-%Y %H:%M:%S', dateObject)
+
 
 
 ##############################################################################

@@ -9,25 +9,40 @@ $( document ).ready(function() {
 		console.log(authorId); /* at this point can ship an ajax request to make a change to the db */
 		$( ".button_receive" ).attr("disabled", true);
 		$( this ).parent().css( "background-color", "#10F82B" );
+		$( this ).parent().css( "padding", "20px" );
 		$( this ).parent().prepend( "<h3 class=\"changemelater\">This recipient has been selected</h3> " );
 		/* $( this ).parent().addClass( "selected_receive" );  <- can replace above css line with this */
 
 	});
 	$( ".button_assist" ).click(function() {
-		alert( "Handler for .click() called." );
+		$( ".button_assist" ).attr("disabled", true);
+		$( this ).parent().css( "background-color", "#10F82B" );
+		$( this ).parent().css( "padding", "20px" );
+		$( this ).parent().prepend( "<h3 class=\"changemelater\">This helper has been selected</h3> " );
 	});
 });
+
+
+
+
 </script>
+
 
 <h2>Post # {{ post.id }}:  {{ post.shortSummary }}</h2>
 <br>
 <div class="left-align">
 	<div class="post">
 		<p><strong>Post from <a href="/user/{{ post.ownerId }}">User {{ post.ownerId }}</a>: &nbsp;&nbsp; {{ post.shortSummary }}</strong></p>
-		<p>{{ post.timeStamp }}  from zip code {{ post.zipcode }}</p>
+		<p>{{ post.time_string() }}  from zip code {{ post.zipcode }}</p>
 		<p>{{ post.longDescription }}</p>
 		<br>
-		<p>
+		<p>Needs this to happen ASAP?&nbsp;&nbsp;<span class="myBool_{{ post.isASAP }}"></span></p> 
+		<p>Can meet weekdays?&nbsp;&nbsp;<span class="myBool_{{ post.canWeekdays }}"></span></p>
+		<p>Can meet evenings?&nbsp;&nbsp;<span class="myBool_{{ post.canEvenings }}"></span></p>
+		<p>Can meet weekends?&nbsp;&nbsp;<span class="myBool_{{ post.canWeekends }}"></span></p>
+		<p>Can travel for this?&nbsp;&nbsp;<span class="myBool_{{ post.canTravel }}"></span></p>
+		<p>Can meet in a central/public location?&nbsp;&nbsp;<span class="myBool_{{ post.canMeet }}"></span></p>
+
 	</div>
 </div>
 <br><br>
@@ -42,8 +57,16 @@ $( document ).ready(function() {
 		<p><strong>Reply from <a href="/user/{{ comment.authorId }}">User {{ comment.authorId }}</a></strong>
 			&nbsp;&nbsp; [ &nbsp;&nbsp;&nbsp; {{ comment.time_string() }}  from zip code {{ comment.zipcode }} &nbsp;&nbsp;&nbsp; ]</p>
 		<p><img src="/static/img_{{ comment.role }}.jpg" style="padding:15px;"/>:: <em>{{ comment.comment }}</em></p>
+		<p>Can meet ASAP?&nbsp;&nbsp;<span class="myBool_{{ comment.canASAP }}"></span></p> 
+		<p>Weekdays?&nbsp;&nbsp;<span class="myBool_{{ comment.canWeekdays }}"></span></p>
+		<p>Evenings?&nbsp;&nbsp;<span class="myBool_{{ comment.canEvenings }}"></span></p>
+		<p>Weekends?&nbsp;&nbsp;<span class="myBool_{{ comment.canWeekends }}"></span></p>
+		<p>Can travel for this?&nbsp;&nbsp;<span class="myBool_{{ comment.canTravel }}"></span></p>
+		<p>Can meet in a central/public location?&nbsp;&nbsp;<span class="myBool_{{ comment.canMeet }}"></span></p>
+
 		</div>
 	</div><br>
+
 	
 	{% endfor %}
 </div>
@@ -93,5 +116,11 @@ $( document ).ready(function() {
                 <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit">
             </form>
 
+<script>
+$( ".myBool_0" ).append( "<em>No</em>" );
+</script>
+<script>
+$( ".myBool_1" ).append( "<em>Yes</em>" );
+</script>
 
 {% endblock %}

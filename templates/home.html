@@ -8,7 +8,7 @@
 {% for post in recent_posts %}
 <div class="left-align">
 	<div class="post">
-<p><a href="/posts/{{ post.id }}">Post # {{ post.id }}</a> ({{ post.timeStamp }}): {{ post.shortSummary }}</p>
+<p><a href="/posts/{{ post.id }}">Post # {{ post.id }}</a> ({{ post.time_string() }}): {{ post.shortSummary }}</p>
 	</div><br>
 </div>
 {% endfor %}
@@ -19,7 +19,7 @@
 <div class="left-align">
 	{% for reply in recent_replies %}
 	<div class="thread">
-		<p>Reply to <a href="/posts/{{ reply.listingId }}">Post # {{ reply.listingId }}</a> ({{ reply.timeStamp }})</p>
+		<p>Reply to <a href="/posts/{{ reply.listingId }}">Post # {{ reply.listingId }}</a> ({{ reply.time_string() }})</p>
 		<p><img src="/static/img_{{ reply.role }}.jpg" style="padding:15px;"/>::<em>{{ reply.comment }}</em></p>
 	</div><br>
 	{% endfor %}
