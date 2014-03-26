@@ -84,6 +84,10 @@ class Response(Base):
 	responder = relationship("User", backref=backref("responses"), order_by=id)
 	post = relationship("Post", backref=backref("responses"), order_by = id)
 
+	def time_string(instance_of_class):
+		dateObject = time.localtime(instance_of_class.timeStamp)
+		return time.strftime('%m-%d-%Y %H:%M', dateObject)
+
 
 ##############################################################################
 
@@ -138,6 +142,7 @@ def submit_comment(userid, postid, roleform, commentform, zipcodeform, isasapfor
 		timeStamp=int(time.time()))
 	session.add(temp_comment)
 	session.commit()
+
 
 
 
