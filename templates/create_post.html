@@ -3,6 +3,9 @@
 {% block body %}
            <form class="posting" method="POST">
                 <h2 class="posting-heading">Post to OGEE</h2>
+
+                <div class="left-align">
+
                 <p><strong>Have something to gift? Need something gifted? Continue below.</strong>  <em><a href="/guidelines">Read our posting guidelines here.</a></em></p>
                 <br>
                 <p>You are looking to:...
@@ -41,8 +44,15 @@
 
                 <p>What buslines, if any, are nearby?</p>
                 <input type="text" class="form-control" placeholder="e.g. 44, 12" name="busLines">
-
+                <br><br>
+                <p>Care to upload a picture?
+                <form enctype="multipart/form-data" action="/upload/image" method="post">
+                    <input id="image-file" type="file" />
+                </form></p>
+                <br>
                 <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit">
+
+            </div>
             </form>
 {% endblock %}
 

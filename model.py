@@ -10,11 +10,15 @@ from sqlalchemy import func
 import time
 import datetime
 import sqlite3
+import os
+import sys
 
+DB_URI = os.getenv("DATABASE_URI")
 ##############################################################################
 
  
-ENGINE = create_engine("sqlite:///test.db", echo=False)
+ENGINE = create_engine(DB_URI, echo=False)
+
 session = scoped_session(sessionmaker(bind=ENGINE, autocommit = False, autoflush = False))
 
 Base = declarative_base()
