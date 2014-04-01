@@ -18,6 +18,7 @@
     console.log(response);
     if (response.status === 'connected') {
       var FBID = response.authResponse.userID;
+      var FBTOKEN = response.authResponse.accessToken;
       console.log("fbid = " + FBID);
       var url = '{{ url_for("check_for_user") }}';
       console.log(url);
@@ -25,7 +26,7 @@
        $.ajax({
          url: '{{ url_for("check_for_user") }}',
          type: "POST",
-         data: { fbid: FBID }
+         data: { fbid: FBID, fbtoken: FBTOKEN }
        }).done(function(data) {
          console.log("it worked, we got: " + data)
          location.href=data;
@@ -33,6 +34,8 @@
          alert( "Request failed: " + textStatus );
        });
       sessionStorage.setItem('FBID', FBID);
+
+
 
     } else if (response.status === 'not_authorized') {
       FB.login();

@@ -24,6 +24,9 @@ def index():
 def check_for_user():
 	fbid = request.form['fbid'] #from the post, collect fbid
 	session['fbid'] = fbid	
+	fbtoken = request.form['fbtoken']
+	session['fbtoken'] = fbtoken
+
 	print "try-lookup"
 	try: 
 		user = model.session.query(model.User).filter_by(facebookId=fbid).one()
@@ -84,10 +87,14 @@ def home():
 
 @app.route("/user/<userid>")
 def userpage(userid):
-	FBID = model.getFacebookId(userid)
+	FBID = model.getFacebookId(userid)  #gets the browsed user's id
+	local_FBID = session.get("fbid")  # gets the logged-in user's id
+	local_FBaccessToken = session.get("fbtoken")
+
 	recent_posts = model.recent_posts(userid)
 	recent_replies = model.recent_replies(userid)
-	return render_template("user.html", recent_posts=recent_posts, recent_replies=recent_replies, FBID=FBID)
+	return render_template("user.html", recent_posts=recent_posts, recent_replies=recent_replies, FBID=FBID, 
+				local_FBID=local_FBID, local_FBaccessToken=local_FBaccessToken)
 
 
 @app.route("/posts/<postid>")

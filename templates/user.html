@@ -10,7 +10,90 @@
           status     : true,
           xfbml      : true
         });
-      };
+
+        FB.getLoginStatus(function(response) {
+  			if (response.status === 'connected') {
+			    var FBuid = response.authResponse.userID;
+    			var FBaccessToken = response.authResponse.accessToken;
+
+    			getMutualFriends(FBaccessToken);
+    			getAllFriends(FBaccessToken);
+
+
+		  } else if (response.status === 'not_authorized') {
+		  	FB.login();
+		  } else {
+		  	FB.login();
+ 		 }
+ });
+
+    function getMutualFriends(FBaccessToken) {
+
+        FB.api(
+    		
+    		"/{{ local_FBID }}/mutualfriends/{{ FBID }}?access_token=" + FBaccessToken,
+
+    		function (response) {
+    	  		if (response && !response.error) {
+
+    	  			var mutual_friend_array = [];
+
+    	  			for (var i = 0; i < response.data.length; i++) {
+
+						var id = response.data[i].id;
+
+						var mutual_friend_object = {
+							id: id,  /* can remove this */
+							name: response.data[i].name, /* can remove this */
+							method: "GET",
+							relative_url: "/" + id + "/picture",
+						}
+
+						mutual_friend_array.push(mutual_friend_object);  /* could instead:  friend_array[i]=id;  */
+
+						/* send friend array over using batch command */
+						/* print out what they return, see how to pick out the data I need */
+						/* might need to loop through the array and the data that is returned */
+
+    	  			}
+
+    			    console.log(mutual_friend_array)
+    			  }
+    			else {
+    				console.log("something isn't quite working")
+    				console.log(response.error)
+    			}
+   			}
+		);
+};
+};
+
+	function getAllFriends(FBaccessToken) {
+		FB.api(
+			"/{{ FBID }}/friends?access_token=" + FBaccessToken,
+
+			function (response) {
+				if (response && !response.error) {
+					var all_friend_array = [];
+					for (var i = 0; i < response.data.length; i++) {
+						var id = response.data[i].id;
+						var all_friend_object = {
+							method: "GET",
+							relative_url: "/" + id + "/picture",
+						}
+
+						all_friend_array.push(all_friend_object); 
+					}
+					console.log(all_friend_array)
+				} else {
+					console.log("something is broken in getAllFriends")
+					console.log(response.error)
+				}
+			}
+			);
+	};
+        // response.authResponse.accessToken
+
 
       (function(d, s, id){
          var js, fjs = d.getElementsByTagName(s)[0];
@@ -18,10 +101,11 @@
          js = d.createElement(s); js.id = id;
          js.src = "//connect.facebook.net/en_US/all.js";
          fjs.parentNode.insertBefore(js, fjs);
+
+         
+
        }(document, 'script', 'facebook-jssdk'));
     </script>
-
-
 
 <br><br><br>
 <h2>Recent posts </h2>
