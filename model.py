@@ -144,6 +144,15 @@ def getCommentsForPost(postid):
 	comments = session.query(Response).filter_by(listingId=c.id)
 	return comments
 
+def getLastTenPosts():
+	last_ten = session.query(Post).order_by(Post.id.desc()).limit(10)
+	return last_ten
+
+def getFacebookId(userid):
+	u = session.query(User).get(userid)
+	return u.facebookId
+
+
 def submit_comment(userid, postid, roleform, commentform, zipcodeform, isasapform, canweekdaysform, caneveningsform, 
 	canweekendsform, cantravelform, canmeetform, buslinesform):
 

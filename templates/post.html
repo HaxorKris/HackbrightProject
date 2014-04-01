@@ -53,9 +53,8 @@ $( document ).ready(function() {
 	<!-- for later: if the value of comment.wasSelected is not null, disable the selection buttons -->
 	<div class="thread">
 		<div class="role_{{ comment.role }} reply">
-		<button name="clickme" class="button_{{ comment.role }}" data-authorId="{{ comment.authorId }}">Select this poster</button><br>
-		<p><strong>Reply from <a href="/user/{{ comment.authorId }}">User {{ comment.authorId }}</a></strong>
-			&nbsp;&nbsp; [ &nbsp;&nbsp;&nbsp; {{ comment.time_string() }}  from zip code {{ comment.zipcode }} &nbsp;&nbsp;&nbsp; ]</p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<strong>Reply from <a href="/user/{{ comment.authorId }}">User {{ comment.authorId }}</a></strong>
+			&nbsp;&nbsp; [ &nbsp;&nbsp;&nbsp; {{ comment.time_string() }}  from zip code {{ comment.zipcode }} &nbsp;&nbsp;&nbsp; ]&nbsp;&nbsp;&nbsp;&nbsp;<button name="clickme" class="button_{{ comment.role }}" data-authorId="{{ comment.authorId }}">Select this poster</button>
 		<p><img src="/static/img_{{ comment.role }}.jpg" style="padding:15px;"/>:: <em>{{ comment.comment }}</em></p>
 		<p>Can meet ASAP?&nbsp;&nbsp;<span class="myBool_{{ comment.canASAP }}"></span></p> 
 		<p>Weekdays?&nbsp;&nbsp;<span class="myBool_{{ comment.canWeekdays }}"></span></p>
@@ -112,8 +111,9 @@ $( document ).ready(function() {
                 <input type="text" class="form-control" placeholder="e.g. 44, 12" name="busLines">
 
             	</div>
-
+            	<div class = "center_submit_button">
                 <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit">
+            	</div>
             </form>
 
 <script>

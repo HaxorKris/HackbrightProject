@@ -1,9 +1,22 @@
 {% extends 'master2.html' %}
 
 {% block body %}
-<br><br>
+
 <h2>Recent posts near you</h2>
-<br>
+
+	{% for post in last_ten %}
+
+	<div class="left-align">
+		<div class="post">
+			<p><a href="/posts/{{ post.id }}">Post # {{ post.id }} ({{ post.time_string() }}): {{ post.shortSummary }}</a></p>
+			<p><em>From: {{ post.zipcode }} </em></p>
+			<p>{{ post.longDescription }}</p>
+		</div><br>
+	</div>
+
+
+	{% endfor %}
+
 
 {% endblock %}
 

@@ -1,0 +1,50 @@
+{% extends 'master2.html' %}
+
+{% block body %}
+
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '221505671371305',
+          status     : true,
+          xfbml      : true
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/all.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+
+
+<br><br><br>
+<h2>Recent posts </h2>
+
+{% for post in recent_posts %}
+<div class="left-align">
+	<div class="post">
+<p><a href="/posts/{{ post.id }}">Post # {{ post.id }}</a> ({{ post.time_string() }}): {{ post.shortSummary }}</p>
+	</div><br>
+</div>
+{% endfor %}
+
+<br><br><br>
+<h2>Recent replies </h2>
+
+<div class="left-align">
+{% for reply in recent_replies %}
+<div class="thread">
+	<p>Reply to <a href="/posts/{{ reply.listingId }}">Post # {{ reply.listingId }}</a> ({{ reply.time_string() }})</p>
+	<p><img src="/static/img_{{ reply.role }}.jpg" style="padding:15px;"/>::<em>{{ reply.comment }}</em></p>
+</div><br>
+{% endfor %}
+</div>
+
+
+{% endblock %}

@@ -25,6 +25,10 @@ body {
 	padding: 20px;
 }
 
+.center_submit_button {
+	text-align:center;
+}
+
 .role_receive {
 
 }

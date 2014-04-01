@@ -82,9 +82,12 @@ def home():
 # 	return render_template("your_profile.html")
 
 
-# @app.route("/user/<uid>")
-# def userpage():
-# 	return render_template("user.html")
+@app.route("/user/<userid>")
+def userpage(userid):
+	FBID = model.getFacebookId(userid)
+	recent_posts = model.recent_posts(userid)
+	recent_replies = model.recent_replies(userid)
+	return render_template("user.html", recent_posts=recent_posts, recent_replies=recent_replies, FBID=FBID)
 
 
 @app.route("/posts/<postid>")
@@ -146,7 +149,8 @@ def submission():
 
 @app.route("/recent")
 def global_get_posts():
-	return render_template("recent.html")
+	last_ten = model.getLastTenPosts()
+	return render_template("recent.html", last_ten=last_ten)
 
 @app.route("/guidelines")
 def posting_guidelines():
