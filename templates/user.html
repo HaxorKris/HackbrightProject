@@ -60,7 +60,7 @@
     			    console.log(mutual_friend_array)
     			  }
     			else {
-    				console.log("something isn't quite working")
+    				console.log("something is broken in getMutualFriends")
     				console.log(response.error)
     			}
    			}
@@ -70,7 +70,7 @@
 
 	function getAllFriends(FBaccessToken) {
 		FB.api(
-			"/{{ FBID }}/friends?access_token=" + FBaccessToken,
+			"/{{ FBID }}/friends?limit=30&access_token=" + FBaccessToken,
 
 			function (response) {
 				if (response && !response.error) {
