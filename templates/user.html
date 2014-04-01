@@ -43,13 +43,13 @@
 						var id = response.data[i].id;
 
 						var mutual_friend_object = {
-							id: id,  /* can remove this */
-							name: response.data[i].name, /* can remove this */
+							// id: id,  
+							// name: response.data[i].name, 
 							method: "GET",
 							relative_url: "/" + id + "/picture",
 						}
 
-						mutual_friend_array.push(mutual_friend_object);  /* could instead:  friend_array[i]=id;  */
+						mutual_friend_array.push(mutual_friend_object);  /* could instead:  mutual_friend_array[i]=id;  */
 
 						/* send friend array over using batch command */
 						/* print out what they return, see how to pick out the data I need */
