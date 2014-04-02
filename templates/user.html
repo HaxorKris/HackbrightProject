@@ -31,7 +31,7 @@
 
         FB.api(
     		
-    		"/{{ local_FBID }}/mutualfriends/{{ FBID }}?access_token=" + FBaccessToken,
+    		"/{{ local_FBID }}/mutualfriends/{{ FBID }}?limit=30&access_token=" + FBaccessToken,
 
     		function (response) {
     	  		if (response && !response.error) {
