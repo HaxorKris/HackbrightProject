@@ -29,9 +29,28 @@ body {
 	text-align:center;
 }
 
+.friend_container {
+	width:400px;
+	height:500px;
+}
+
+.profile_picture {
+	padding: 10px;
+}
+
+#all_friends {
+	vertical-align:top;
+}
+
+#mutual_friends {
+	vertical-align:top;
+}
+
+
 .role_receive {
 
 }
+
 
 .role_assist {
 

@@ -37,16 +37,34 @@
     	  		if (response && !response.error) {
 
     	  			var mutual_friend_array = [];
+
     	  			for (var i = 0; i < response.data.length; i++) {
+
 						var id = response.data[i].id;
-						var url = "http://graph.facebook.com/" + id + "/picture";
-						var linkback = "http://www.facebook.com/" + id;
 
-						var mutual_friend = "<a href=\"" + linkback + "\"><img src=\"" + url + "\" class=\"profile_picture\"></a>";
+						var mutual_friend_object = {
+							// id: id,  
+							// name: response.data[i].name, 
+							method: "GET",
+							relative_url: "/" + id + "/picture",
+						}
 
-						$("#mutual_friends").append(mutual_friend);
+						mutual_friend_array.push(mutual_friend_object);  
+						/* could instead:  mutual_friend_array[i]=mutual_friend_object;  */
+
+
+						FB.api('path', 'GET', {batch: that_array_you_showed_me}, function(data){
+							console.log(data)
+						});
+
+						/* TODO: 
+						* send friend array over using batch command 
+						* print out what they return, see how to pick out the data I need 
+						* might need to loop through the array and the data that is returned */
 
     	  			}
+
+    			    console.log(mutual_friend_array)
     			  }
     			else {
     				console.log("something is broken in getMutualFriends")
@@ -66,15 +84,14 @@
 					var all_friend_array = [];
 					for (var i = 0; i < response.data.length; i++) {
 						var id = response.data[i].id;
-						var url = "http://graph.facebook.com/" + id + "/picture";
+						var all_friend_object = {
+							method: "GET",
+							relative_url: "/" + id + "/picture",
+						}
 
-						
-						var all_friend = "<img src=\"" + url + "\" class=\"profile_picture\">";
-
-						$("#all_friends").append(all_friend);
-						
+						all_friend_array.push(all_friend_object); 
 					}
-
+					console.log(all_friend_array)
 				} else {
 					console.log("something is broken in getAllFriends")
 					console.log(response.error)
@@ -83,10 +100,6 @@
 			);
 	};
         // response.authResponse.accessToken
-
-        // In my copious free time:
-        // TODO: compare list of mutual friends to list of all friends (max=60), make new list of id's not in mutual friends list
-        // then clip that back to 30 and display (cut the iterations back to 30)
 
 
       (function(d, s, id){
@@ -103,18 +116,10 @@
 
 <br><br><br>
 
-<div class="row">
-	<div id="mutual_friends" class="col-md-6">
-		<h2>Mutual friends</h2>
-	</div>
-
-	<div id="all_friends" class="col-md-6">
-		<h2>More* friends</h2>
-	</div>
-</div>
-
-
-<br>
+<h2>Mutual friends</h2>
+<br><br><br>
+<h2>All friends</h2>
+<br><br><br>
 <h2>Recent posts </h2>
 
 {% for post in recent_posts %}
