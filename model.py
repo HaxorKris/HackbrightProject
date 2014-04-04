@@ -159,6 +159,9 @@ def selectRecipientOfItem(postid, recipientid):
 	post.offerExtendedTo = recipientid
 	session.commit()
 
+def selectFacilitatorOfItem(postid, helperid):
+	post = session.query(Post).get(postid)
+#	update the helper's comment's timestamp
 
 def submit_comment(userid, postid, roleform, commentform, zipcodeform, isasapform, canweekdaysform, caneveningsform, 
 	canweekendsform, cantravelform, canmeetform, buslinesform):

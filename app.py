@@ -126,12 +126,16 @@ def add_comment(postid):
 	return redirect(url_for("home"))
 
 
-@app.route("/posts/<postid>/<authorid>")
+@app.route("/posts/<postid>/receive/<authorid>")
 def select_recipient(postid, authorid):
-	
+
 	model.selectRecipientOfItem(postid, authorid)
 
+	return "Okay"
 
+@app.route("/posts/<postid>/assist/<helperid>")
+def select_helper(postid, helperid):
+	model.selectFacilitatorOfItem(postid, helperid)
 
 @app.route("/submit")
 def post():

@@ -6,24 +6,37 @@
 $( document ).ready(function() {
 	$( ".button_receive" ).click(function() {
 		var authorId=$( this ).data("authorid");  /* this will look for data attrs that start with 'data-' */
+		var roleId=$( this ).data("roleid");
+		var postId=$( this ).data("postid");
 		console.log(authorId); /* at this point can ship an ajax request to make a change to the db */
 
 		$( ".button_receive" ).attr("disabled", true);
-		$( this ).parent().css( "background-color", "#10F82B" );
+		$( this ).parent().css( "background-color", "#6BF77B" );
 		$( this ).parent().css( "padding", "20px" );
-		$( this ).parent().prepend( "<h3 class=\"changemelater\">This recipient has been selected</h3> " );
+		$( this ).parent().prepend( "<h3 class=\"changemelater\"><strong>This recipient has been selected</strong></h3> " );
 		/* $( this ).parent().addClass( "selected_receive" );  <- can replace above css line with this */
+
+		$.ajax({
+			url: "/posts/" + postId + "/" + roleId + "/" + authorId,
+			method: "get",
+		}).done(function(data){
+			console.log("response received" + data);
+		}).fail(function(){
+			console.log("response failure");
+		});
+
 
 	});
 	$( ".button_assist" ).click(function() {
 		$( ".button_assist" ).attr("disabled", true);
-		$( this ).parent().css( "background-color", "#10F82B" );
+		$( this ).parent().css( "background-color", "#6BF77B" );
 		$( this ).parent().css( "padding", "20px" );
-		$( this ).parent().prepend( "<h3 class=\"changemelater\">This helper has been selected</h3> " );
+		$( this ).parent().prepend( "<h3 class=\"changemelater\"><strong>This helper has been selected</strong></h3> " );
 	});
+
+
+
 });
-
-
 
 </script>
 
@@ -56,7 +69,8 @@ $( document ).ready(function() {
 	<div class="thread">
 		<div class="role_{{ comment.role }} reply">
 		&nbsp;&nbsp;&nbsp;&nbsp;<strong>Reply from <a href="/user/{{ comment.authorId }}">User {{ comment.authorId }}</a></strong>
-			&nbsp;&nbsp; [ &nbsp;&nbsp;&nbsp; {{ comment.time_string() }}  from zip code {{ comment.zipcode }} &nbsp;&nbsp;&nbsp; ]&nbsp;&nbsp;&nbsp;&nbsp;<button name="clickme" class="button_{{ comment.role }}" data-authorId="{{ comment.authorId }}">Select this poster</button>
+			&nbsp;&nbsp; [ &nbsp;&nbsp;&nbsp; {{ comment.time_string() }}  from zip code {{ comment.zipcode }} &nbsp;&nbsp;&nbsp; ]&nbsp;&nbsp;&nbsp;&nbsp;
+			<button name="clickme" class="button_{{ comment.role }}" data-authorid="{{ comment.authorId }}" data-roleid="{{ comment.role }}" data-postid="{{ post.id }}">Select this poster</button>
 			
 			<!-- onclick="setRecipient({{ post.id }}, {{ comment.authorId }})" -->
 
