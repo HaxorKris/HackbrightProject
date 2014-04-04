@@ -7,6 +7,7 @@ $( document ).ready(function() {
 	$( ".button_receive" ).click(function() {
 		var authorId=$( this ).data("authorid");  /* this will look for data attrs that start with 'data-' */
 		console.log(authorId); /* at this point can ship an ajax request to make a change to the db */
+
 		$( ".button_receive" ).attr("disabled", true);
 		$( this ).parent().css( "background-color", "#10F82B" );
 		$( this ).parent().css( "padding", "20px" );
@@ -21,7 +22,6 @@ $( document ).ready(function() {
 		$( this ).parent().prepend( "<h3 class=\"changemelater\">This helper has been selected</h3> " );
 	});
 });
-
 
 
 
@@ -50,11 +50,18 @@ $( document ).ready(function() {
 
 <div class="left-align">
 	{% for comment in comments %}
+	<!-- before passing list, check if the id of the recipient is someone who has replied
+	e.g. if post recipient is not None, strip the buttons out, call out the recipient -->
 	<!-- for later: if the value of comment.wasSelected is not null, disable the selection buttons -->
 	<div class="thread">
 		<div class="role_{{ comment.role }} reply">
 		&nbsp;&nbsp;&nbsp;&nbsp;<strong>Reply from <a href="/user/{{ comment.authorId }}">User {{ comment.authorId }}</a></strong>
 			&nbsp;&nbsp; [ &nbsp;&nbsp;&nbsp; {{ comment.time_string() }}  from zip code {{ comment.zipcode }} &nbsp;&nbsp;&nbsp; ]&nbsp;&nbsp;&nbsp;&nbsp;<button name="clickme" class="button_{{ comment.role }}" data-authorId="{{ comment.authorId }}">Select this poster</button>
+			
+			<!-- onclick="setRecipient({{ post.id }}, {{ comment.authorId }})" -->
+
+			<!-- <script src='posts/{{ post.id }}/{{ comment.authorId }}'></script> -->
+		
 		<p><img src="/static/img_{{ comment.role }}.jpg" style="padding:15px;"/>:: <em>{{ comment.comment }}</em></p>
 		<p>Can meet ASAP?&nbsp;&nbsp;<span class="myBool_{{ comment.canASAP }}"></span></p> 
 		<p>Weekdays?&nbsp;&nbsp;<span class="myBool_{{ comment.canWeekdays }}"></span></p>
@@ -113,6 +120,7 @@ $( document ).ready(function() {
             	</div>
             	<div class = "center_submit_button">
                 <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit">
+             
             	</div>
             </form>
 

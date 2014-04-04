@@ -7,6 +7,7 @@ from sqlalchemy.orm import relationship, backref
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy import func
+from sqlalchemy import update
 import time
 import datetime
 import sqlite3
@@ -100,6 +101,7 @@ class Response(Base):
 
 
 
+
 ##############################################################################
 
 # metadata = MetaData()
@@ -128,7 +130,6 @@ def recent_posts(uid):
 	post_list = post_list.order_by(Post.id.desc())
 	return post_list
 
-
 def recent_replies(uid):
 	u = session.query(User).get(uid)
 	reply_list = session.query(Response).filter_by(authorId=u.id)
@@ -151,6 +152,12 @@ def getLastTenPosts():
 def getFacebookId(userid):
 	u = session.query(User).get(userid)
 	return u.facebookId
+
+def selectRecipientOfItem(postid, recipientid):
+	post = session.query(Post).get(postid)
+#	post=session.query(Post).filter_by(id=postid).first()
+	post.offerExtendedTo = recipientid
+	session.commit()
 
 
 def submit_comment(userid, postid, roleform, commentform, zipcodeform, isasapform, canweekdaysform, caneveningsform, 

@@ -126,6 +126,13 @@ def add_comment(postid):
 	return redirect(url_for("home"))
 
 
+@app.route("/posts/<postid>/<authorid>")
+def select_recipient(postid, authorid):
+	
+	model.selectRecipientOfItem(postid, authorid)
+
+
+
 @app.route("/submit")
 def post():
 

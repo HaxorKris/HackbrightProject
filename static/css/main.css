@@ -29,6 +29,16 @@ body {
 	text-align:center;
 }
 
+.center_submit_button .btn {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+   
+
+
+
 .friend_container {
 	width:400px;
 	height:500px;
