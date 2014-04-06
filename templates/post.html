@@ -56,6 +56,12 @@ $( document ).ready(function() {
 		<p>Can travel for this?&nbsp;&nbsp;<span class="myBool_{{ post.canTravel }}"></span></p>
 		<p>Can meet in a central/public location?&nbsp;&nbsp;<span class="myBool_{{ post.canMeet }}"></span></p>
 
+        <br><br><br>
+        <p>Care to upload a picture?
+        	<form enctype="multipart/form-data" action="/upload/image" method="post">
+            	<input id="image-file" type="file" />
+                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit">
+        	</form></p>
 	</div>
 </div>
 <br><br>

@@ -100,6 +100,17 @@ class Response(Base):
 		return time.strftime('%m-%d-%Y %H:%M:%S', dateObject)
 
 
+class Reputation(Base):
+	__tablename__ = "feedback"
+	id = Column(Integer, primary_key = True)
+	postId = Column(Integer)
+	authorId = Column(Integer)
+	targetId = Column(Integer)  # this is the person they connected with
+	timeStamp = Column(Integer)
+	score = Column(Integer)
+	comment = Column(String(64))
+
+
 
 
 ##############################################################################
@@ -162,6 +173,11 @@ def selectRecipientOfItem(postid, recipientid):
 def selectFacilitatorOfItem(postid, helperid):
 	post = session.query(Post).get(postid)
 #	update the helper's comment's timestamp
+
+def leaveFeedback(postid, authorid, targetid, score, comment):
+	temp_feedback = Reputation(postId=postid, authorId=authorid, targetId=targetid, timeStamp=int(time.time()), score=score, comment=comment)
+	session.add(temp_feedback)
+	session.commit()
 
 def submit_comment(userid, postid, roleform, commentform, zipcodeform, isasapform, canweekdaysform, caneveningsform, 
 	canweekendsform, cantravelform, canmeetform, buslinesform):
