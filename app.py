@@ -156,6 +156,7 @@ def leave_feedback(postid, authorid, targetid):
 	
 	model.leaveFeedback(postid, authorid, targetid, score, comment)
 
+
 @app.route("/submit")
 def post():
 
