@@ -15,6 +15,7 @@ import os
 import sys
 
 DB_URI = os.getenv("DATABASE_URI")
+
 ##############################################################################
 
  
@@ -109,7 +110,6 @@ class Reputation(Base):
 	timeStamp = Column(Integer)
 	score = Column(Integer)
 	comment = Column(String(64))
-
 
 
 
