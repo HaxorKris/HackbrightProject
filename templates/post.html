@@ -57,11 +57,11 @@ $( document ).ready(function() {
 		<p>Can meet in a central/public location?&nbsp;&nbsp;<span class="myBool_{{ post.canMeet }}"></span></p>
 
         <br><br><br>
-        <p>Care to upload a picture?
+<!--         <p>Care to upload a picture?
         	<form enctype="multipart/form-data" action="/upload/image" method="post">
             	<input id="image-file" type="file" />
                 <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit">
-        	</form></p>
+        	</form></p> -->
 	</div>
 </div>
 <br><br>
@@ -89,6 +89,10 @@ $( document ).ready(function() {
 		<p>Weekends?&nbsp;&nbsp;<span class="myBool_{{ comment.canWeekends }}"></span></p>
 		<p>Can travel for this?&nbsp;&nbsp;<span class="myBool_{{ comment.canTravel }}"></span></p>
 		<p>Can meet in a central/public location?&nbsp;&nbsp;<span class="myBool_{{ comment.canMeet }}"></span></p>
+
+		<br><br></div>
+		<div class="right-align">
+		<p><a href="/feedback/{{ post.id }}/{{ comment.authorId }}/{{ post.ownerId }}"><em>I connected with this community member and want to leave feedback.</em></a></p>
 
 		</div>
 	</div><br>

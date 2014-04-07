@@ -135,7 +135,26 @@ def select_recipient(postid, authorid):
 
 @app.route("/posts/<postid>/assist/<helperid>")
 def select_helper(postid, helperid):
+
 	model.selectFacilitatorOfItem(postid, helperid)
+
+
+@app.route("/feedback/<postid>/<authorid>/<targetid>")
+def start_feedback(postid, authorid, targetid):
+
+	return render_template("reputation.html", postid=postid, authorid=authorid, targetid=targetid)
+
+
+@app.route("/feedback/<postid>/<authorid>/<targetid>", methods=["POST"])
+def leave_feedback(postid, authorid, targetid):
+
+	postid = request.form.get("postid")
+	authorid = request.form.get("authorid")
+	targetid = request.form.get("targetid")
+	score = request.form.get("score")
+	comment = request.form.get("comment")
+	
+	model.leaveFeedback(postid, authorid, targetid, score, comment)
 
 @app.route("/submit")
 def post():

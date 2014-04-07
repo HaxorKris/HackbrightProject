@@ -1,27 +1,28 @@
 {% extends 'master2.html' %}
 
 {% block body %}
+           <div class="left-align">
            <h2><a href="posts/{{ postid }}">Post # {{ postid }}</a></h2>
            Connection between you (User {{ authorid }}) and <a href="users/{{ targetid }}">User {{ targetid }}</a>.
 
            <form class="posting" method="POST">
                 <h2 class="posting-heading">Post about your connection</h2>
-                <div class="left-align">
+                
                 
                 <input type="hidden" name="postid" value="{{ postid }}">
                 <input type="hidden" name="authorid" value="{{ authorid }}">
                 <input type="hidden" name="targetid" value="{{ targetid }}">
-
-                <p>How did this transaction go?
+                <br>
+                <p><strong>How did this transaction go?</strong><br>
                 <input type="radio" name="score" value="2">Fantastic. Good communication and/or coordination.<br>
                 <input type="radio" name="score" value="1">Average or neutral. This did not happen or something understandable came up.<br>
                 <input type="radio" name="score" value="0">Poor. I experienced problems communicating or coordinating with this person.<br>
             	</p>
-
-              	<p>Any comments about this connection?</p>
+            	<br>
+              	<p><strong>Any comments about this connection?</strong></p>
                 <input type="text" class="form-control" placeholder="(max 60 chars)" name="comment">
-
-           		</div>
+                <br><br>
+           		<input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit feedback">
             </form>
-
+            </div>
 {% endblock %}

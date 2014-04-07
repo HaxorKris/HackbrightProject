@@ -13,6 +13,10 @@ body {
 	text-align:left;
 }
 
+.right-align {
+	text-align:right;
+}
+
 .thread {
 	border:3px solid gray;
 	background-color:#FBFCE9;
